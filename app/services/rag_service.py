@@ -4,8 +4,7 @@ import shutil
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
-from langchain_huggingface import HuggingFaceEmbeddings
-
+from langchain_community.embeddings import FakeEmbeddings
 # 📁 Folder to store vectors
 VECTOR_PATH = "vectorstore"
 
@@ -13,9 +12,7 @@ VECTOR_PATH = "vectorstore"
 db_cache = None
 
 # 🔥 Faster + stable embedding model
-embeddings = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-MiniLM-L6-v2"
-)
+embeddings = FakeEmbeddings(size=384)
 
 # =========================
 # ✅ PROCESS PDF (FIXED)
