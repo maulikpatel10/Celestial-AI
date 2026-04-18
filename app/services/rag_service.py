@@ -39,9 +39,8 @@ def process_pdf(file_path):
 
     print("📄 Creating FAISS index...")
 
-    embeddings = HuggingFaceEmbeddings(
-        model_name="sentence-transformers/all-MiniLM-L6-v2"
-    )
+    # 🔥 Prevent instant OOM crash on Render Free Tier when loading PyTorch model
+    embeddings = FakeEmbeddings(size=384)
 
     vectorstore = FAISS.from_documents(docs, embeddings)  # ✅ USE docs
     vectorstore.save_local(VECTOR_PATH)

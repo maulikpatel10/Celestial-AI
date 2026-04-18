@@ -3,7 +3,7 @@ from app.routes import chat, upload
 
 app = FastAPI()
 
-@app.get("/")
+@app.api_route("/", methods=["GET", "HEAD"])
 def root():
     return {"message": "API is running 🚀"}
 
