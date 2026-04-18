@@ -1,6 +1,6 @@
 import os
 
-from langchain_community.document_loaders import PyPDFLoader
+from pypdf import PdfReader
 
 # 🔥 Store the raw PDF text in memory directly to bypass FAISS segfaults completely
 pdf_text_cache = ""
@@ -14,11 +14,18 @@ def process_pdf(file_path):
     print("📄 Loading PDF:", file_path)
 
     try:
-        loader = PyPDFLoader(file_path)
-        documents = loader.load()
+        reader = PdfReader(file_path)
         
-        # Simply append all text together
-        pdf_text_cache = "\n\n".join([doc.page_content for doc in documents])
+        # OOM Safeguard: Limit massive PDF uploads on Render Free Tier
+        max_pages = min(15, len(reader.pages))
+        extracted_text = ""
+        
+        for i in range(max_pages):
+            page_text = reader.pages[i].extract_text()
+            if page_text:
+                extracted_text += page_text + "\n\n"
+        
+        pdf_text_cache = extracted_text
         print("✅ PDF processed & extracted successfully. Text length:", len(pdf_text_cache))
     except Exception as e:
         print("❌ Failed to process PDF:", e)
