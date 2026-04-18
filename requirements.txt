@@ -4,3 +4,7 @@ langchain
 langchain-community
 faiss-cpu
 pypdf
+python-multipart
+sentence-transformers
+python-dotenv
+groq

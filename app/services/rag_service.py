@@ -4,7 +4,7 @@ import shutil
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
-from langchain_community.embeddings import FakeEmbeddings
+from langchain_community.embeddings import FakeEmbeddings, HuggingFaceEmbeddings
 # 📁 Folder to store vectors
 VECTOR_PATH = "vectorstore"
 
