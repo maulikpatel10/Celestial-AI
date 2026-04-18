@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.services.rag_service import query_pdf, vectorstore
+from app.services.rag_service import query_pdf
 from app.services.llm_service import generate_ai_response
 router = APIRouter()
 
