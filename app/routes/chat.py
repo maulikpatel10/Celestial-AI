@@ -35,9 +35,6 @@ async def chat_api(user_input: str):
             "content": response
         })
 
-        # 🔥 Prevent very large responses (avoid crash)
-        response = response[:1000]
-
         return {"response": response}
 
     except Exception as e:
